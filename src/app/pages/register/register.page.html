@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Volver al login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="logo-container">
+    <img class="logo-animation" src="assets/img/carnita.png" alt="Logo"/>
+  </div>
+  
+  <div class="form-animation">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="success">Crear cuenta</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-input [(ngModel)]="name" type="text" required label="Nombre" labelPlacement="floating" placeholder="Ingrese su nombre"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-input [(ngModel)]="email" type="email" required label="Email" labelPlacement="floating" placeholder="Ingrese su email"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-input [(ngModel)]="password" type="password" required label="Contraseña" labelPlacement="floating" placeholder="Ingrese su contraseña"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-input [(ngModel)]="confirmPassword" type="password" required label="Confirmar contraseña" labelPlacement="floating" placeholder="Confirme su contraseña"></ion-input>
+        </ion-item>
+        
+        <ion-button color="success" expand="block" class="ion-margin-top" (click)="register()">Registrarse</ion-button>
+        <ion-button color="medium" fill="clear" expand="block" (click)="goToLogin()">Ya tengo una cuenta</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
