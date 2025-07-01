@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+import { DataService } from 'src/app/services/data.service';
+
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,9 @@ export class RegisterPage {
 
   constructor(
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private dataService: DataService,
+    private toastController: ToastController
   ) { }
 
   async mostrarAlerta(mensaje: string) {
@@ -33,7 +37,7 @@ export class RegisterPage {
     return emailRegex.test(email);
   }
 
-  register() {
+  async register() {
     // Validar campos
     if (!this.name) {
       this.mostrarAlerta('El nombre es obligatorio');
@@ -65,11 +69,29 @@ export class RegisterPage {
       return;
     }
 
-    // En una aplicación real, aquí se enviarían los datos a un servicio de autenticación
-    // Por ahora, simplemente mostraremos un mensaje de éxito y navegaremos a la página de inicio
-    this.mostrarAlerta('Registro exitoso').then(() => {
-      this.router.navigate(['/home'], { state: { email: this.email } });
-    });
+    try {
+      // Usar el DataService para registrar al usuario en la base de datos SQLite
+      const success = await this.dataService.registerUser(this.name, this.email, this.password);
+      
+      if (success) {
+        // Mostrar mensaje de éxito
+        const toast = await this.toastController.create({
+          message: 'Usuario registrado exitosamente',
+          duration: 2000,
+          position: 'bottom',
+          color: 'success'
+        });
+        await toast.present();
+        
+        // Navegar a la página de login
+        this.router.navigate(['/login']);
+      } else {
+        this.mostrarAlerta('Error al registrar usuario');
+      }
+    } catch (error) {
+      console.error('Error en registro:', error);
+      this.mostrarAlerta('Error al registrar usuario');
+    }
   }
 
   goToLogin() {

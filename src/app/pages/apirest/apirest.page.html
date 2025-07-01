@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" routerDirection="root">
+        <ion-icon name="home-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Países del Mundo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Países del Mundo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="loading" class="ion-padding ion-text-center">
+    <ion-spinner name="dots" color="primary"></ion-spinner>
+    <p>Cargando países...</p>
+  </div>
+
+  <ion-list *ngIf="!loading">
+    <ion-item *ngFor="let country of countries">
+      <ion-thumbnail slot="start">
+        <img [src]="country.flags.png" alt="{{country.name.common}} flag">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>Pais: {{ country.name.common }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  
+  <ion-text *ngIf="!loading && countries.length === 0" class="ion-padding ion-text-center">
+    <p>No se encontraron países</p>
+  </ion-text>
+</ion-content>

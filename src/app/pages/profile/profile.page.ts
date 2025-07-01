@@ -57,11 +57,11 @@ export class ProfilePage implements OnInit {
       return;
     }
 
-    // Validar que la contraseña tenga al menos 6 caracteres
-    if (this.newPassword.length < 6) {
+    // Validar que la contraseña tenga al menos 8 caracteres
+    if (this.newPassword.length < 8) {
       const alert = await this.alertController.create({
         header: 'Error',
-        message: 'La contraseña debe tener al menos 6 caracteres',
+        message: 'La contraseña debe tener al menos  caracteres',
         buttons: ['OK']
       });
 

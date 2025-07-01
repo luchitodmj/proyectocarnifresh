@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,24 +14,29 @@ const routes: Routes = [
   },
   {
     path: 'add-product',
-    loadChildren: () => import('./pages/add-product/add-product.module').then( m => m.AddProductPageModule)
+    loadChildren: () => import('./pages/add-product/add-product.module').then( m => m.AddProductPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'product-list',
-    loadChildren: () => import('./pages/product-list/product-list.module').then( m => m.ProductListPageModule)
+    loadChildren: () => import('./pages/product-list/product-list.module').then( m => m.ProductListPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'product-detail',
-    loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
+    loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'alert-settings',
-    loadChildren: () => import('./pages/alert-settings/alert-settings.module').then( m => m.AlertSettingsPageModule)
+    loadChildren: () => import('./pages/alert-settings/alert-settings.module').then( m => m.AlertSettingsPageModule),
+    canActivate: [AuthGuard]
   },
   
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'register',
@@ -38,8 +44,19 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
+  {
+    path: 'camara',
+    loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'apirest',
+    loadChildren: () => import('./pages/apirest/apirest.module').then( m => m.ApirestPageModule)
+  },
+
 ];
 
 @NgModule({

@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cámara</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="camera-container">
+    <!-- Imagen capturada -->
+    <div class="image-preview" *ngIf="capturedImage">
+      <img [src]="capturedImage" alt="Imagen capturada">
+    </div>
+    
+    <!-- Botones de acción -->
+    <div class="action-buttons">
+      <ion-button expand="block" color="success" (click)="takePicture()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Tomar Foto
+      </ion-button>
+      
+      <ion-button expand="block" color="tertiary" (click)="selectFromGallery()">
+        <ion-icon slot="start" name="images"></ion-icon>
+        Seleccionar de Galería
+      </ion-button>
+    </div>
+    
+    <!-- Galería de fotos -->
+    <div class="photo-gallery" *ngIf="photos.length > 0">
+      <h3>Fotos recientes</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" *ngFor="let photo of photos">
+            <div class="photo-item">
+              <img [src]="photo" alt="Foto">
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

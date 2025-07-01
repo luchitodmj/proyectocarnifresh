@@ -1,0 +1,11 @@
+ion-thumbnail {
+  image{
+    border-radius: 6px;
+    width: 50%;
+    height: 35%;
+    object-fit: cover;
+  }
+}
+ion-item{
+  --inner-padding-end: 0px;
+}
